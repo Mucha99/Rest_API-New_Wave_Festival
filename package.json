@@ -1,0 +1,15 @@
+{
+  "name": "Rest_API-New_Wave_Festival",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": "git@github.com:Mucha99/Rest_API-New_Wave_Festival.git",
+  "author": "Bartek Mucha <bartekmucha43@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "dependencies": {
+    "express": "4.17.1",
+    "nodemon": "^2.0.12"
+  }
+}
