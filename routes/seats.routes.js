@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 let db = require('../db');
-const { seats } = require('../db');
+const seats = require('../db');
 
 router.route('/seats').get((req, res) => {
     res.json(db.seats);
@@ -47,7 +47,7 @@ router.route('/seats/:id').put((req, res) => {
 router.route('/seats/:id').delete((req, res) => {
     db.seats.forEach(seat => {
         if(seat.id == req.params.id) {
-            const index = db.testimonials.indexOf(seat);
+            const index = db.seats.indexOf(seat);
             db.seats.splice(index, 1);
         }
     });
