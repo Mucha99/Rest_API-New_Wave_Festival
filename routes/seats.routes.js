@@ -23,6 +23,7 @@ router.route('/seats').post((req, res) => {
     if(db.seats.some(selectedSeat => (selectedSeat.day == req.body.day && selectedSeat.seat == req.body.seat))) {
         return res.status(409).send('This seat is taken');
     } else {
+        db.seats.push(seat);
         req.io.emit('seatsUpdated', db.seats);
         console.log('Miejsce zostało zarezerowane !');
         return res.json(db.seats);
