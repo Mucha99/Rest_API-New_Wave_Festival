@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 let db = require('../db');
+const { seats } = require('../db');
 
 router.route('/seats').get((req, res) => {
     res.json(db.seats);
@@ -22,10 +23,9 @@ router.route('/seats').post((req, res) => {
     if(db.seats.some(selectedSeat => (selectedSeat.day == req.body.day && selectedSeat.seat == req.body.seat))) {
         return res.status(409).send('This seat is taken');
     } else {
-        db.seats.push(seat);
-        return res.json({
-        message: 'ok'
-        });
+        req.io.emit('seatsUpdated', db.seats);
+        console.log('Miejsce zostało zarezerowane !');
+        return res.json(db.seats);
     }
 });
 
