@@ -3,6 +3,7 @@ const cors = require('cors');
 const path = require('path');
 const socket = require('socket.io');
 const mongoose = require('mongoose');
+const helmet = require('helmet');
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(express.static(path.join(__dirname, '/client/build')));
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(helmet());
 
 app.use('/api', testimonialsRoutes);
 app.use('/api', concertsRoutes);
@@ -33,7 +35,7 @@ app.use((req, res) => {
     res.status(404).json({ message: 'Not found...'})
 });
 
-mongoose.connect('mongodb+srv://bartekmucha99:123@cluster0.z5l1u.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(`mongodb+srv://${process.env.username}:${process.env.password}@cluster0.z5l1u.mongodb.net/NewWaveDB?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
 db.once('open', () => {
